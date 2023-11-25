@@ -5,8 +5,8 @@ from jogador import player # Comunicar a pasta responsável pelo jogador
 
 pygame.init()
 
-largura = 1000 # Dimensão de largura da tela
-altura = 1000 # Dimensão de largura da tela
+largura = 920 # Dimensão de largura da tela
+altura = 800 # Dimensão de largura da tela
 
 # Configurações do fundo
 fundo = pygame.image.load('BH1.tiff') # Foto do fundo atualizando
@@ -25,7 +25,7 @@ tocatile.set_volume(.5) # Define som mais baixo para quando bola encosta no bloc
 #Configurações de Tela Inicial
 colorwhite = pygame.Color((255,255,255)) # Criação de variável com cor branca
 tipoletra = pygame.font.Font('Kaph-Italic.ttf', 60) # Comunicar fonte e tamanho para título
-tipoletra2 = pygame.font.Font('Kaph-Italic.ttf', 10) # Comunicar fonte e tamanho para comandos
+tipoletra2 = pygame.font.Font('Kaph-Italic.ttf', 40) # Comunicar fonte e tamanho para comandos
 textoinicial = tipoletra.render('Ice Wrecker', False, colorwhite) # Aparecer nome do Jogo
 texto1 = tipoletra2.render('Pressione Espaço para Iniciar', False, colorwhite) # Aparecer comando para iniciar o jogo
 
@@ -33,10 +33,11 @@ texto1 = tipoletra2.render('Pressione Espaço para Iniciar', False, colorwhite) 
 game = True # Define variável que para o jogo
 while game: # Loop para rodar a tela inicial
     for evento in pygame.event.get(): # Verifica ocorrência de inputs por jogador
-       if evento.type == pygame.QUIT: # Verifica se o jogador fechou a tela
+        if evento.type == pygame.QUIT: # Verifica se o jogador fechou a tela
            game = False # Define variável para False e para o loop de tela inicial
-       if evento.type == pygame.K_SPACE: # Verifica se player clicou na key espaço
-           game = False # Define variável para False e para o loop de tela inicial
+        if evento.type == pygame.KEYDOWN:
+           if evento.type == pygame.K_SPACE: # Verifica se player clicou na key espaço
+               game = False # Define variável para False e para o loop de tela inicial
     janela.fill(colorwhite) # Define fill da janela para cor branca
     janela.blit (fundo_inicio, (0,0))
     janela.blit (textoinicial, (200,100))
@@ -231,7 +232,6 @@ while end:
 # Define variável para False e para o loop de tela inicial
            end = False
        if evento.type == pygame.KEYDOWN:
-# Verifica se player clicou na key espaço
            if evento.key == pygame.K_SPACE:
 # Define variável para False e para o loop de tela inicial
                end = False
