@@ -72,3 +72,35 @@ class Bolinha(object):
 #Movendo a bola ao longo do eixo x e y
         self.a += self.ae
         self.b += self.be
+
+# Funcionamento Main do Jogo
+blocos = []
+def inicial():
+    global blocos # Define uma variável global para os blocos
+    blocos = [] # Lista para armanzenar comandos da classe blocos
+    for a in range(5): # Define tamanho da coluna de blocos
+        for b in range(15): # Define tamanho da fileira de blocos
+            blockcolor = (0,0,100) # Define cor dos blocos para azul claro
+            blocos.append() # Define paraâmetros (x, y, largura, altura e cor) para os blocos
+gameo = False # Define variável de gameover para uso em if de fim de jogo
+
+def novajanelajogo(): # Janela principal do jogo
+    janela.blit(fundo, (0,0)) # Inicia o fundo da tela de jogo
+    player.draw(janela)
+    for ball in balls: # Loop para bola na tela
+        ball.draw(janela) # Desenha bola na tela
+    for brick in blocos: # Loop para bloco na tela
+        brick.draw(janela) # Desenha bloco na tela
+    
+    winfont = pygame.font.Font() # Define fonte para endgame
+
+    if gameo: # Vericia se gameover é True ou False
+        if len(blocos) == 0: # Verifica quantidade blocos
+            textofim = winfont.render('Bem Jogado, Você Venceu!', 1, colorwhite) # Texto de fim de jogo em WIN
+        else:
+            textofim = winfont.render('Que Pena, Você Perdeu!', 1, colorwhite) # Texto de fim de jogo em LOSE
+        janela.blit(textofim, ((largura//2 - textofim.get_width()//2), altura//2 - textofim.get_height()//2)) # Posição do texto de final
+        jogonovo = winfont.render('Pressione Espaço para uma Nova Tentativa', 1, colorwhite) # Texto de reiniciar
+        janela.blit(jogonovo, (largura//2 - jogonovo.get_width()//2, altura//2 + 35)) # Posição do texto de reinciar
+
+        pygame.display.update() # Atualiza novas condições do jogo
