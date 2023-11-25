@@ -98,7 +98,7 @@ def inicial():
     bola=Bolinha(largura/2-10, altura-400,20,20,cor_bolinha)
     balls=[Bolinha]
 
-    
+
 # Funcionamento Main do Jogo
 blocos = []
 def inicial():
@@ -130,3 +130,36 @@ def novajanelajogo(): # Janela principal do jogo
         janela.blit(jogonovo, (largura//2 - jogonovo.get_width()//2, altura//2 + 35)) # Posição do texto de reinciar
 
         pygame.display.update() # Atualiza novas condições do jogo
+
+#Texto final--------------------------------------------------
+#Texto caso o player vença
+end_txt = fonte.render('Bom Jogo!', False, white)
+#Texto caso o player perca
+end1_txt = fonte.render('Volte Novamente!', False, white)
+#Texto quando jogador sair do jogo
+end2_txt = fonte.render('Até mais!', False, white)
+#Tela Final----------------------------------
+end = True
+somfundo.play()
+# Loop para rodar a tela final
+while end:
+# Verifica ocorrência de inputs por jogador
+   for evento in pygame.evento.get():
+# Verifica se o jogador fechou a tela
+       if evento.type == pygame.QUIT:
+# Define variável para False e para o loop de tela inicial
+           end = False
+       if evento.type == pygame.KEYDOWN:
+# Verifica se player clicou na key espaço
+           if evento.key == pygame.K_SPACE:
+# Define variável para False e para o loop de tela inicial
+               end = False
+# Define fill da janela para cor branca
+   janela.fill(white)
+   janela.blit(somfundo,(0,0))
+   janela.blit(end_txt, (200, 100 ))
+   janela.blit(end1_txt, (30, 500))
+   janela.blit(end2_txt, (90, 600))
+# Aplica novas mudanças à tela inicial
+   pygame.display.update()
+
