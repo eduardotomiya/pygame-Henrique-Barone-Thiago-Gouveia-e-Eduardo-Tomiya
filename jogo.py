@@ -16,4 +16,8 @@ fundo_inicio = pygame.transform.scale(fundo_inicio,(largura,altura))
 janela = pygame.display.set_mode((largura,altura)) # Criação da janela utilizada para rodar o jogo
 pygame.display.set_caption("Quebra-gelos") # Nome do jogo na Tela Inicial
 
-
+#Configurações de som
+tocabloco = pygame.mixer.Sound() # Som de quando bola encosta em blocos
+tocatile = pygame.mixer.Sound() # Som de quando bola encosta no bloco do jogador
+somfundo = pygame.mixer.Sound() # Som de fundo do jogo
+tocatile.set_volume(.5) # Define som mais baixo para quando bola encosta no bloco do jogador
