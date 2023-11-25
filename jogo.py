@@ -92,11 +92,11 @@ cor_blocos=random.choice(colors)
 #A bolinha sempre será azul
 cor_bolinha=blue
 
-def inicial():
+
 #Criando instâncias das classes player, bolinha e 
-    player=player(largura/2 - 50, altura-100,140,20, cor_jogo)
-    bola=Bolinha(largura/2-10, altura-400,20,20,cor_bolinha)
-    balls=[Bolinha]
+player=player(largura/2 - 50, altura-100,140,20, cor_jogo)
+ball = Bolinha(largura/2-10, altura-400,20,20,cor_bolinha)
+balls = [Bolinha]
 
 
 # Funcionamento Main do Jogo
@@ -131,13 +131,94 @@ def novajanelajogo(): # Janela principal do jogo
 
         pygame.display.update() # Atualiza novas condições do jogo
 
+# Main Loop Core Jogo
+jogo = True
+somfundo.stop()
+while jogo == False and game == False:
+    timer.tick(FPS)
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:
+            jogo = False
+    if not gameo:
+        for bolinha in balls:
+            bolinha.move()
+        if pygame.mouse.get_pos()[0] - player.c//2 < 0:
+            player.a = 0
+        elif pygame.mouse.get_pos()[0] + player.c//2 > largura:
+            player.a = largura - player.c
+        else:
+            player.a = pygame.mouse.get_pos()[0] - player.c//2
+
+        for bolinha in balls:
+            if (bolinha.a >= player.a and bolinha.a <= player.a + player.c) or (bolinha.a + bolinha.c >= player.a and bolinha.a +ball.c <= player.a + player.c):
+                if bolinha.b + bolinha.d >= player.b and bolinha.b + bolinha.d <= player.b + player.d:
+                    bolinha.be *= -1
+                    bolinha.b = player.b - bolinha.d -1
+                    tocatile.play()
+            if bolinha.a + bolinha.c >= largura:
+                tocatile.play()
+                bolinha.ae *= -1
+            if bolinha.a < 0:
+                tocatile.play()
+                bolinha.ae *= -1
+            if bolinha.b <= 0:
+                tocatile.play()
+                bolinha.be *= -1
+            if bolinha.b > altura:
+               balls.pop(balls.index(bolinha))
+        
+        for bloco in blocos:
+           for bolinha in balls:
+               if (bolinha >= bolinha.a and bolinha.a <= bloco.a + bloco.c) or bolinha.a + bolinha.c >= bloco.a and bolinha.a + bolinha.c <= bloco.a + bloco.c:
+                   if (bolinha.b >= bloco.b and bolinha.b <= bloco.b + bloco.d) or bolinha.b + bolinha.d >= bloco.b and bolinha.b + bolinha.d <= bloco.b + bloco.d:
+                       bloco.visible = False
+                       if bloco.pregnant:
+                           cor_bola = (0,0,200)
+                           balls.append(bolinha(bloco.a, bloco.b, 20, 20, cor_bola))
+                       #bricks.pop(bricks.index(brick))
+                       bolinha.be *= -1
+                       tocabloco.play()
+                       break
+        
+        for bloco in blocos:
+           if bloco.visible == False:
+               blocos.pop(blocos.index(bloco))
+
+
+        if len(balls) == 0:
+           gameo = True
+
+    chaves = pygame.key.get_pressed()
+    if len(blocos) == 0:
+       vencer = True
+       gameo = True
+    if gameo:
+       if chaves[pygame.K_SPACE]:
+           gameo = False
+           vencer = False
+           cor_bola = (0,0,200)
+           ball = bolinha(largura/2 - 10, altura - 400, 20, 20, cor_bola)
+           bolas = [ball]
+           if len(bolas) == 0:
+               bolas.append(ball)
+
+
+           blocos.clear()
+           for i in range(6):
+               for j in range(10):
+                   cor_bloco = random.choice(colors)
+                   blocos.append(bloco(10 + j * 79, 50 + i * 35, 70, 25, cor_bloco))
+    novajanelajogo()
+    janela.fill(colorwhite)
+    janela.blit(fundo, (0,0))
+
 #Texto final--------------------------------------------------
 #Texto caso o player vença
-end_txt = fonte.render('Bom Jogo!', False, white)
+end_txt = tipoletra.render('Bom Jogo!', False, white)
 #Texto caso o player perca
-end1_txt = fonte.render('Volte Novamente!', False, white)
+end1_txt = tipoletra.render('Volte Novamente!', False, white)
 #Texto quando jogador sair do jogo
-end2_txt = fonte.render('Até mais!', False, white)
+end2_txt = tipoletra.render('Até mais!', False, white)
 #Tela Final----------------------------------
 end = True
 somfundo.play()
