@@ -73,6 +73,32 @@ class Bolinha(object):
         self.a += self.ae
         self.b += self.be
 
+
+
+#Definindo as cores
+
+blue = pygame.Color('blue')
+pink = pygame.Color('deeppink')
+orange = pygame.Color('firebrick1')
+yellow = pygame.Color('gold')
+green = pygame.Color('green')
+white = pygame.Color('white')
+
+colors=[blue,pink,orange,yellow,green,white]
+#Cor aleatória para o jogador
+cor_jogo=random.choice(colors)
+#Cor aleatória bloco
+cor_blocos=random.choice(colors)
+#A bolinha sempre será azul
+cor_bolinha=blue
+
+def inicial():
+#Criando instâncias das classes player, bolinha e 
+    player=player(largura/2 - 50, altura-100,140,20, cor_jogo)
+    bola=Bolinha(largura/2-10, altura-400,20,20,cor_bolinha)
+    balls=[Bolinha]
+
+    
 # Funcionamento Main do Jogo
 blocos = []
 def inicial():
