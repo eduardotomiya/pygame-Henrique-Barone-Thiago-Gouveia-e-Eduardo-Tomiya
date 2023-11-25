@@ -22,7 +22,12 @@ tocatile = pygame.mixer.Sound() # Som de quando bola encosta no bloco do jogador
 somfundo = pygame.mixer.Sound() # Som de fundo do jogo
 tocatile.set_volume(.5) # Define som mais baixo para quando bola encosta no bloco do jogador
 
-
+#Configurações de Tela Inicial
+colorwhite = pygame.Color((255,255,255)) # Criação de variável com cor branca
+tipoletra = pygame.font.Font() # Comunicar fonte e tamanho para título
+tipoletra2 = pygame.font.Font() # Comunicar fonte e tamanho para comandos
+textoincial = tipoletra.render('Ice Wrecker', False, colorwhite) # Aparecer nome do Jogo
+texto1 = tipoletra2.render('Pressione Espaço para Iniciar', False, colorwhite) # Aparecer comando para iniciar o jogo
 
 #classe bolinha
 
