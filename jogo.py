@@ -1,7 +1,7 @@
 import pygame # Importar funções da biblioteca Pygame
 import random # Importar funções randomicas
 from blocos import Bloco # Comunicar a pasta responsável por blocos do jogo
-from jogador import jogador # Comunicar a pasta responsável pelo jogador
+from jogador import player # Comunicar a pasta responsável pelo jogador
 
 pygame.init()
 
@@ -26,8 +26,26 @@ tocatile.set_volume(.5) # Define som mais baixo para quando bola encosta no bloc
 colorwhite = pygame.Color((255,255,255)) # Criação de variável com cor branca
 tipoletra = pygame.font.Font() # Comunicar fonte e tamanho para título
 tipoletra2 = pygame.font.Font() # Comunicar fonte e tamanho para comandos
-textoincial = tipoletra.render('Ice Wrecker', False, colorwhite) # Aparecer nome do Jogo
+textoinicial = tipoletra.render('Ice Wrecker', False, colorwhite) # Aparecer nome do Jogo
 texto1 = tipoletra2.render('Pressione Espaço para Iniciar', False, colorwhite) # Aparecer comando para iniciar o jogo
+
+# Funcionamento Tela Inicial
+game = True # Define variável que para o jogo
+while game: # Loop para rodar a tela inicial
+    for evento in pygame.event.get(): # Verifica ocorrência de inputs por jogador
+       if evento.type == pygame.QUIT: # Verifica se o jogador fechou a tela
+           game = False # Define variável para False e para o loop de tela inicial
+       if evento.type == pygame.K_SPACE: # Verifica se player clicou na key espaço
+           game = False # Define variável para False e para o loop de tela inicial
+    janela.fill(colorwhite) # Define fill da janela para cor branca
+    janela.blit (fundo_inicio, (0,0))
+    janela.blit (textoinicial, (200,100))
+    janela.blit (texto1, (30,500))
+    somfundo.play() # Toca o som de fundo da tela inicial
+    pygame.display.update() # Aplica novas mudanças à tela inicial
+
+timer = pygame.time.Clock() # Define tempo
+FPS = 40 # Definição do jogo em Frames Por Segundo
 
 #classe bolinha
 
