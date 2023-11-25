@@ -5,9 +5,15 @@ from jogador import jogador # Comunicar a pasta responsável pelo jogador
 
 pygame.init()
 
-width = 1000 # Dimensão de largura da tela
-height = 1000 # Dimensão de largura da tela
+largura = 1000 # Dimensão de largura da tela
+altura = 1000 # Dimensão de largura da tela
 
 # Configurações do fundo
-Fundo = pygame.image.load
+fundo = pygame.image.load() # Foto do fundo atualizando
+fundo = pygame.transform.scale(fundo, (largura,altura)) # Ajustar fundo às dimensões da tela
+fundo_inicio = pygame.image.load() # Foto do fundo da tela inicial
+fundo_inicio = pygame.transform.scale(fundo_inicio,(largura,altura))
+janela = pygame.display.set_mode((largura,altura)) # Criação da janela utilizada para rodar o jogo
+pygame.display.set_caption("Quebra-gelos") # Nome do jogo na Tela Inicial
+
 
