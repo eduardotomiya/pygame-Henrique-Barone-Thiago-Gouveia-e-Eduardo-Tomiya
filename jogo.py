@@ -21,3 +21,31 @@ tocabloco = pygame.mixer.Sound() # Som de quando bola encosta em blocos
 tocatile = pygame.mixer.Sound() # Som de quando bola encosta no bloco do jogador
 somfundo = pygame.mixer.Sound() # Som de fundo do jogo
 tocatile.set_volume(.5) # Define som mais baixo para quando bola encosta no bloco do jogador
+
+
+
+#classe bolinha
+
+class Bolinha(object):
+    def inicio(self,a,b,c,d,color):
+#Posição e tamanho da bola 
+        self.a=a
+        self.b=b
+        self.c=c
+        self.d=d
+#Cor da bola(azul)
+        self.color=(0,0,255)
+#Velocidades iniciais em cada eixo
+        self.ae=random.randint(-6,6)
+        self.be=6
+#Cálculo das coordenadas do canto inferior direito
+        self.aa= self.a + self.c
+        self.bb= self.b + self.d
+
+    def desenho(self,vitoria):
+#Desenho do formato da bola
+        pygame.desenho.circle(vitoria,self.color, (self.a, self.b),12,6)
+    def move(self):
+#Movendo a bola ao longo do eixo x e y
+        self.a += self.ae
+        self.b += self.be
