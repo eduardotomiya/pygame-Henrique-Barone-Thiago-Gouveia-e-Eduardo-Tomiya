@@ -1,5 +1,4 @@
 import pygame # Importar funções da biblioteca Pygame
-import random # Importar funções randomicas
 from blocos import Bloco # Comunicar a pasta responsável por blocos do jogo
 from jogador import jogador # Comunicar a pasta responsável pelo jogador
 from bolas import circle
