@@ -100,7 +100,6 @@ while game and work == False:
         index_fundo_dir = -1
     if index_fundo == 0:
         index_fundo_dir = 1
-    print(index_fundo, index_fundo_dir)
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
             game = False
