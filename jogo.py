@@ -90,9 +90,7 @@ init()
 
 # Main Loop Core Jogo
 game = True
-somfundo.stop()
 while game and work == False:
-    somfundo.play()
     timer.tick(FPS)
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
