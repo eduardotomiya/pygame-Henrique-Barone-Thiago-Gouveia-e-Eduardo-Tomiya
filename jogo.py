@@ -19,9 +19,11 @@ fundo_update = []
 for i in range(1, 31):
     fundo_update.append(pygame.transform.scale(pygame.image.load(f'BH{i}.tiff'), (largura,altura)))
 #Configurações de som
+pygame.mixer.music.load('BGMusic.mp3')  # Carrega a música de fundo
+pygame.mixer.music.set_volume(0.5)  # Define o volume da música de fundo
+pygame.mixer.music.play(-1) 
 tocabloco = pygame.mixer.Sound('Ice Sound.mp3') # Som de quando bola encosta em blocos
 tocatile = pygame.mixer.Sound('TileHit.mp3') # Som de quando bola encosta no bloco do jogador
-somfundo = pygame.mixer.Sound('BGMusic.mp3') # Som de fundo do jogo
 tocatile.set_volume(.2) # Define som mais baixo para quando bola encosta no bloco do jogador
 
 #Configurações de Tela Inicial
@@ -45,7 +47,6 @@ while work: # Loop para rodar a tela inicial
     janela.blit(textoinicial, (140, 100))
     janela.blit(texto1, (80, 500))
     janela.blit(texto2, (150, 600))
-    somfundo.play() # Da play no som de fundo
     pygame.display.update() # Atualiza novas condições de jogo
 
 timer = pygame.time.Clock() # Define tempo do jogo
@@ -90,25 +91,25 @@ balls = [bola]
 init()
 
 # Main Loop Core Jogo
-game = True
-index_fundo = 0
-index_fundo_dir = 1
-while game and work == False:
-    timer.tick(FPS)
-    index_fundo = (index_fundo + index_fundo_dir) % len(fundo_update)
+game = True # Variável para loop de funcionamento do jogo
+index_fundo = 0 # Index para mudança de fundo
+index_fundo_dir = 1 # Direção para index para mudança de fundo
+while game and work == False: # Loop de funcionamento do jogo
+    timer.tick(FPS) # Evolução timer de acordo com FPS
+    index_fundo = (index_fundo + index_fundo_dir) % len(fundo_update) # Update fundo
     if index_fundo == len(fundo_update) - 1:
-        index_fundo_dir = -1
+        index_fundo_dir = -1 # Update fundo contrário
     if index_fundo == 0:
-        index_fundo_dir = 1
-    for evento in pygame.event.get():
+        index_fundo_dir = 1 # Update fundo sentido normal
+    for evento in pygame.event.get(): # Verificação de ocorrência de eventos
         if evento.type == pygame.QUIT:
-            game = False
+            game = False # Variável Game para False
     if not finale:
         for bolinha in balls:
-            bolinha.move()
-        if pygame.mouse.get_pos()[0] - Jogador.w//2 < 0:
+            bolinha.move() # Movimento das bolas
+        if pygame.mouse.get_pos()[0] - Jogador.w//2 < 0: # Movimento do mouse
             Jogador.x = 0
-        elif pygame.mouse.get_pos()[0] + Jogador.w//2 > largura:
+        elif pygame.mouse.get_pos()[0] + Jogador.w//2 > largura: # Movimento do mouse
             Jogador.x = largura - Jogador.w
         else:
             Jogador.x = pygame.mouse.get_pos()[0] - Jogador.w //2 # Define posição do bloco do jogador de acordo com posição do mouse
@@ -183,7 +184,6 @@ texto2end = tipoletra.render('Até mais!', False, colorwhite) # Texto para quand
 
 #Tela Final
 tchau = True # Variavel para rodar loop final
-somfundo.play() # Play no som de final
 while tchau: # Loop para rodar a tela final
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
