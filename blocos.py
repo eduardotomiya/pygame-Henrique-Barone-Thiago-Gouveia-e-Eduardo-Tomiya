@@ -11,7 +11,7 @@ class Bloco(object):
         self.xx = self.x + self.w
         self.yy = self.y + self.h
 
-        self.ranNum = random.randint(0,10)
+        self.ranNum = random.randint(0,12)
         if self.ranNum < 3:
             self.pregnant = True
         else:
