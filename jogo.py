@@ -9,13 +9,15 @@ largura = 905 # Dimensão de largura da tela
 altura = 800 # Dimensão de largura da tela
 
 # Configurações do fundo
-fundo = pygame.image.load('BH1.tiff') # Foto de fundo
-fundo = pygame.transform.scale(fundo, (largura,altura)) # Ajustar fundo às dimensões da tela
+# fundo = pygame.image.load('BH1.tiff') # Foto de fundo
+# fundo = pygame.transform.scale(fundo, (largura,altura)) # Ajustar fundo às dimensões da tela
 fundo_inicio = pygame.image.load('SpaceInit.png') # Foto do fundo da tela inicial
 fundo_inicio = pygame.transform.scale(fundo_inicio,(largura,altura))
 janela = pygame.display.set_mode((largura, altura)) # Criação da janela utilizada para rodar o jogo
 pygame.display.set_caption('Space Cruiser') # Nome do jogo na Tela Inicial
-
+fundo_update = []
+for i in range(1, 31):
+    fundo_update.append(pygame.transform.scale(pygame.image.load(f'BH{i}.tiff'), (largura,altura)))
 #Configurações de som
 tocabloco = pygame.mixer.Sound('Ice Sound.mp3') # Som de quando bola encosta em blocos
 tocatile = pygame.mixer.Sound('TileHit.mp3') # Som de quando bola encosta no bloco do jogador
@@ -47,7 +49,7 @@ while work: # Loop para rodar a tela inicial
     pygame.display.update() # Atualiza novas condições de jogo
 
 timer = pygame.time.Clock() # Define tempo do jogo
-FPS = 200 # Definição do jogo em Frames Por Segundo
+FPS = 40 # Definição do jogo em Frames Por Segundo
 
 # Funções Main do Jogo
 blocos = [] 
@@ -60,7 +62,6 @@ def init():
             blocos.append(Bloco(5 + j * 45, 50 + i * 35, 40, 25, cor_bloco)) # Define parâmetros (x, y, largura, altura e cor) para os blocos
 finale = False # Define variável de gameover para uso em if de fim de jogo
 def redrawGameWindow(): # Janela principal do jogo
-    janela.blit(fundo, (0,0)) # Inicia o fundo da tela de jogo
     Jogador.draw(janela)
     for bolinha in balls: # Loop para bolas na tela
         bolinha.draw(janela) # Desenha bola na tela
@@ -90,8 +91,16 @@ init()
 
 # Main Loop Core Jogo
 game = True
+index_fundo = 0
+index_fundo_dir = 1
 while game and work == False:
     timer.tick(FPS)
+    index_fundo = (index_fundo + index_fundo_dir) % len(fundo_update)
+    if index_fundo == len(fundo_update) - 1:
+        index_fundo_dir = -1
+    if index_fundo == 0:
+        index_fundo_dir = 1
+    print(index_fundo, index_fundo_dir)
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
             game = False
@@ -166,7 +175,7 @@ while game and work == False:
                     blocos.append(Bloco(5 + j * 45, 50 + i * 35, 40, 25, cor_bloco)) # Define parâmetros (x, y, largura, altura e cor) para os blocos
     redrawGameWindow()
     janela.fill(colorwhite)
-    janela.blit(fundo, (0,0))
+    janela.blit(fundo_update[index_fundo], (0,0))
 
 #Texto final
 textoend = tipoletra.render('Bem Jogado!', False, colorwhite) # Texto caso o player vença

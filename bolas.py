@@ -8,7 +8,7 @@ class circle(object):
         self.h = h
         self.color = color
         self.xv = random.randint(-6,6 )
-        self.yv = 8
+        self.yv = 12
         self.xx = self.x + self.w
         self.yy = self.y + self.h
 
