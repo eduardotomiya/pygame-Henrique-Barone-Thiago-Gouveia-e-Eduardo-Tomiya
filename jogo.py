@@ -59,7 +59,12 @@ def init():
     blocos = [] # Lista para armanzenar comandos da classe blocos
     for i in range(5): # Define tamanho da coluna de blocos
         for j in range(20): # Define tamanho da fileira de blocos
-            cor_bloco = (173,216,230) # Define cor dos blocos para azul claro
+            cor_bloco = (0,80,230) # Define cor dos blocos para azul claro
+            if i == 1: cor_bloco = (10,110,230)
+            if i == 2: cor_bloco = (50,140,230)
+            if i == 3: cor_bloco = (90,170,230)
+            if i == 4: cor_bloco = (130,200,230)
+            if i == 5: cor_bloco = (173,216,230)
             blocos.append(Bloco(5 + j * 45, 50 + i * 35, 40, 25, cor_bloco)) # Define parâmetros (x, y, largura, altura e cor) para os blocos
 finale = False # Define variável de gameover para uso em if de fim de jogo
 def redrawGameWindow(): # Janela principal do jogo
@@ -171,7 +176,12 @@ while game and work == False: # Loop de funcionamento do jogo
             blocos.clear()
             for i in range(5): # Define tamanho da coluna de blocos
                 for j in range(20): # Define tamanho da fileira de blocos
-                    cor_bloco = (173,216,230) # Define cor dos blocos para azul claro
+                    cor_bloco = (0,80,230) # Define cor dos blocos para azul claro
+                    if i == 1: cor_bloco = (10,110,230)
+                    if i == 2: cor_bloco = (50,140,230)
+                    if i == 3: cor_bloco = (90,170,230)
+                    if i == 4: cor_bloco = (130,200,230)
+                    if i == 5: cor_bloco = (173,216,230) # Define cor dos blocos para azul claro
                     blocos.append(Bloco(5 + j * 45, 50 + i * 35, 40, 25, cor_bloco)) # Define parâmetros (x, y, largura, altura e cor) para os blocos
     redrawGameWindow()
     janela.fill(colorwhite)
